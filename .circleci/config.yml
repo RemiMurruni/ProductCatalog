@@ -12,17 +12,17 @@ jobs:
           key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
       - run:
          name: Chmod permissions  
-         command: sudo chmod +x ./gradlew
+         command: sudo chmod +x ./gradle
       - run:
           name: Download Dependencies
-          command: ./gradlew androidDependencies
+          command: ./gradle androidDependencies
       - save_cache:
           paths:
             - ~/.gradle
           key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
       - run:
           name: Run UnitTest
-          command: ./gradlew test
+          command: ./gradle test
       - store_artifacts:
           path: app/build/outputs/apk/debug/
           destination: apks/
